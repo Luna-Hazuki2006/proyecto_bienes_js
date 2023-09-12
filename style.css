@@ -1,5 +1,6 @@
 body {
     background-color: lavender;
+    margin: auto;
 }
 
 ul {
@@ -30,9 +31,51 @@ li a:hover {
     display: none;
 }
 
+.centrado {
+    text-align: center;
+}
+
+.logo {
+    width: 10%;
+}
+
 button {
     background-color: aquamarine;
     border: 2px solid rebeccapurple;
     border-radius: 5px;
     padding: 5px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+header {
+    background-color: cornsilk;
+}
+
+header div:first-of-type {
+    display: flex;
+    justify-content: space-between;
+}
+
+header div:first-of-type div {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+}
+
+header div:first-of-type div button {
+    margin: 20px;
+}
+
+footer {
+    background-color: gray;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+main {
+    margin: 20px;
 }

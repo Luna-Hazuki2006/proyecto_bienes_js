@@ -4,22 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
-    <title>Inmuebles bonitos</title>
+    <title>Registrar usuario</title>
 </head>
 <body>
     <header>
         <div>
-            <img src="" alt="Imagen de logo bonito">
+            <img class="logo" src="https://s3-alpha.figma.com/hub/file/1913095808/a7bdc469-cd70-4ea1-bb57-b59204ad8182-cover.png" alt="Imagen de logo bonito">
             <div>
-                <button type="button">Iniciar sesión</button>
-                <button type="button">Registrar usuario</button>
+                <a href="">
+                    <button type="button">Iniciar sesión</button>
+                </a>
+                <a href="../registrar/index.html">
+                    <button type="button">Registrar usuario</button>
+                </a>
                 <button class="oculto" type="button">Ver perfil</button>
             </div>
         </div>
         <div>
             <ul>
                 <li>
-                    <a href="">Menú</a>
+                    <a href="../index.html">Menú</a>
                 </li>
                 <li>
                     <a href="">Compras</a>
@@ -30,5 +34,32 @@
             </ul>
         </div>
     </header>
+    <form>
+        <fieldset>
+            <legend>Registrar usuario</legend>
+            <label for="cedula">Cédula: </label>
+            <input type="text" name="cedula" id="cedula"><br><br>
+            <label for="nombre">Nombre: </label>
+            <input type="text" name="nombre" id="nombre"><br><br>
+            <label for="apellido">Apellido: </label>
+            <input type="text" name="apellido" id="apellido"><br><br>
+            <label for="nacimiento">Nacimiento: </label>
+            <input type="datetime" name="nacimiento" id="nacimiento"><br><br>
+            <label for="direccion">Dirección: </label>
+            <input type="text" name="direccion" id="direccion"><br><br>
+            <label for="correo">Correo electrónico: </label>
+            <input type="email" name="correo" id="correo"><br><br>
+            <label for="contraseña">Contraseña: </label>
+            <input type="password" name="contraseña" id="contraseña"><br><br>
+            <button type="button">Registrar usuario</button>
+        </fieldset>
+    </form>
+    <footer class="centrado">
+        <p>
+            <a href="">Términos y condiciones</a> <br>
+            <a href="">Contáctanos</a> <br>
+            <a href="https://youtu.be/dQw4w9WgXcQ?si=cfrPyhPG3F9aX9Xb" target="_blank">Rick Rolls gratis</a>
+        </p>
+    </footer>
 </body>
 </html>
