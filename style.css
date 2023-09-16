@@ -36,7 +36,7 @@ li a:hover {
 }
 
 .logo {
-    width: 10%;
+    height: 100px;
 }
 
 button {
@@ -62,20 +62,31 @@ header div:first-of-type {
 header div:first-of-type div {
     display: flex;
     align-items: center;
-    margin: 20px;
+    justify-content: space-around;
+    max-width: 300px;
+    min-width: 270px;
+    width: 35%;
+    /* margin: 20px; */
 }
 
 header div:first-of-type div button {
     margin: 20px;
 }
 
+main img {
+    max-width: 100%;
+}
+
 footer {
     background-color: gray;
-    position: fixed;
-    bottom: 0;
     width: 100%;
+}
+
+footer p {
+    margin: 0;
 }
 
 main {
     margin: 20px;
+    min-height: calc(100vh - 159px);
 }
