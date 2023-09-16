@@ -86,17 +86,6 @@ footer p {
     margin: 0;
 }
 
-fieldset {
-    margin-left: auto;
-    margin-right: auto;
-    width: 60%;
-    border-radius: 10px;
-}
-
-legend {
-    text-align: center;
-}
-
 main {
     margin: 20px;
     min-height: calc(100vh - 159px);
@@ -104,6 +93,15 @@ main {
 
 fieldset {
     position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    border-radius: 10px;
+    padding-top: 15px;
+}
+
+fieldset button {
+    width: 100%;
 }
 
 fieldset > legend {
@@ -112,4 +110,5 @@ fieldset > legend {
     top: -12px;
     background-color: lavender;
     transform: translate(-50%, 0);
+    text-align: center;
 }
