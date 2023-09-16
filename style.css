@@ -86,7 +86,35 @@ footer p {
     margin: 0;
 }
 
+fieldset {
+    /* No sé porqué no se centra */
+    /* Normalmete funciona */
+    /* :'v */
+    /* ¿Le cambio el width a 50%? */
+    /* emmmmmmmmmmmmmm */
+    /* No debería tener tanto espacio */
+    /* Pero sí, mínimo se centro :v */
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    border-radius: 10px;
+}
+
+legend {
+    text-align: center;
+}
+
 main {
     margin: 20px;
     min-height: calc(100vh - 159px);
+}
+fieldset {
+    position: relative;
+}
+fieldset>legend {
+    position: absolute;
+    left: 50%;
+    top: -12px;
+    background-color: lavender;
+    transform: translate(-50%, 0);
 }
