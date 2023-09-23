@@ -97,10 +97,14 @@ fieldset {
     margin-right: auto;
     width: 60%;
     border-radius: 10px;
-    padding-top: 15px;
+    padding-top: 20px;
 }
 
 fieldset button {
+    width: 100%;
+}
+
+label, input {
     width: 100%;
 }
 
