@@ -116,3 +116,24 @@ fieldset > legend {
     transform: translate(-50%, 0);
     text-align: center;
 }
+
+form > p {
+    text-align: center;
+}
+
+.seccion > section div {
+    border: 3px solid tomato;
+    border-radius: 10px;
+}
+
+.seccion > section h2 {
+    color: red;
+}
+
+.seccion {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    width: max-content;
+}
