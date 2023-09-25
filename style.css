@@ -98,6 +98,8 @@ fieldset {
     width: 60%;
     border-radius: 10px;
     padding-top: 20px;
+    padding-right: 30px;
+    padding-left: 20px;
 }
 
 fieldset button {
