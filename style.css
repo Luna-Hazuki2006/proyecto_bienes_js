@@ -1,6 +1,7 @@
 body {
     background-color: lavender;
     margin: auto;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 h2 {
@@ -21,7 +22,7 @@ li {
   
 li a {
     display: block;
-    color: white;
+    color: rgb(255, 255, 255);
     text-align: center;
     padding: 16px;
     text-decoration: none;
@@ -44,10 +45,12 @@ li a:hover {
 }
 
 button {
-    background-color: aquamarine;
-    border: 2px solid rebeccapurple;
+    /* background-color: #bbd0ff; */
+    background-color: #b296c4;
+    /* border: 2px solid rgb(102, 51, 153); */
+    border: none;
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
 }
 
 button:hover {
@@ -55,7 +58,7 @@ button:hover {
 }
 
 header {
-    background-color: cornsilk;
+    background-color: #d8d3c3;
 }
 
 header div:first-of-type {
@@ -157,7 +160,7 @@ form > p {
     background-color: whitesmoke;
     height: min-content;
     border-radius: 10px;
-    box-shadow: 10px 10px 5px grey;
+    box-shadow: 5px 5px 5px grey;
 }
 
 .inmuebles img {
