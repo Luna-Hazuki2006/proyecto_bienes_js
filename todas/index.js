@@ -9,7 +9,7 @@ if (localStorage.getItem('token')) {
 }
 
 async function mostrar() {
-    const respuesta = await fetch('https://graco-api.onrender.com/propiedad-principales', {
+    const respuesta = await fetch('https://graco-api.onrender.com/propiedad', {
         method: 'GET', 
         headers: {
             'Content-Type': 'application/json'

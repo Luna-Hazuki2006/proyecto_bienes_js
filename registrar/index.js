@@ -16,12 +16,20 @@ function cargar() {
     boton.classList.add('ingresar')
     form.addEventListener('submit', async (event) => {
         event.preventDefault()
-        pokebola.classList.remove('invisible')
+        console.log('Esta cargando');
         let data = new FormData(form)
+        let cedula = data.get('cedula')
         let nombre = data.get('nombre')
         let apellido = data.get('apellido')
+        let nacimiento = data.get('nacimiento')
+        let direccion = data.get('direccion')
         let correo = data.get('correo')
         let clave = data.get('contraseña')
+        let repetida = data.get('repetida')
+        if (clave != repetida) {
+            modal('¡Oh no! las contrasñas no son iguales\nTrata de no equivocarte :3')
+            return
+        }
         try {
             const respuesta = await fetch('https://graco-api.onrender.com/registrar', {
                 method: 'POST', 
@@ -29,24 +37,25 @@ function cargar() {
                     'Content-Type': 'application/json'
                 }, 
                 body: JSON.stringify({
-                    'name': nombre, 
-                    'lastname': apellido, 
+                    'nombre': nombre, 
+                    'apellido': apellido, 
                     'email': correo, 
-                    'password': clave
+                    'clave': clave, 
+                    'dni': cedula, 
+                    'nacimiento': nacimiento, 
+                    'direccion': direccion
                 })
             })
             const verdad = await respuesta.json()
             if (verdad['success']) {
-                pokebola.classList.add('invisible')
                 console.log(verdad);
                 console.log('felicidades');
                 modal('Felicidades, usuario registrado')
-                location.href = '../'   
+                location.href = '../iniciar/'   
             }
         } catch (error) {
             console.error(error)
             modal('Ha sucedido un error pero no preocupes, no es tu culpa :D')
-            pokebola.classList.add('invisible')
         }
     })
 }
@@ -56,20 +65,6 @@ function modal(texto) {
     console.log(texto);
     p.innerHTML = texto
     mensaje.style.display = 'block'
-}
-
-async function prueba() {
-    // Probablemente no vuelva a usar este código pero...
-    // No lo quiero borrar :(
-    console.log('inicio');
-    fetch('https://graco-api.onrender.com/registrar', {
-        method: "POST", 
-        headers: {
-            "Content-Type": "application/json" 
-        }, 
-        body: JSON.stringify({ "email": "ggimenez", "password": "1" }) 
-    }).then(r=> r.json()).then(r=> console.log(r))
-    console.log('final');
 }
 
 cargar()

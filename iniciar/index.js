@@ -8,16 +8,15 @@ window.onclick = function(event) {
 
 function cargar() {
     let form = document.querySelector('form')
+    console.log(form);
     let boton = document.querySelector('form button')
     boton.classList.add('ingresar')
-    let pokebola = document.querySelector('#pokebola')
-    pokebola.classList.add('invisible')
     form.addEventListener('submit', async (event) => {
         event.preventDefault()
-        pokebola.classList.remove('invisible')
         let data = new FormData(form)
         let correo = data.get('correo')
         let clave = data.get('contraseña')
+        console.log('pasa por aqui');
         try {
             const respuesta = await fetch('https://graco-api.onrender.com/login', {
                 method: 'POST', 
@@ -31,24 +30,21 @@ function cargar() {
             })
             const verdad = await respuesta.json()
             if (verdad['success']) {
-                pokebola.classList.add('invisible')
                 let jwt = verdad['data']['token']
                 console.log(jwt);
                 localStorage.setItem('token', jwt)
-                console.log('felicidades');
-                // alert('Felicidades, inicio de sesión exitoso')
-                modal('Felicidades, inicio de sesión exitoso', '/todas/')
+                let cerrar = document.querySelector('header div div button')
+                let registrar = document.querySelectorAll('header div div a button')
+                cerrar.classList.remove('ocultar')
+                registrar.forEach((e) => e.classList.add('ocultar'))
+                modal('Felicidades, inicio de sesión exitoso', '../todas/')
             } else {
                 console.log('¡Oh no! No pudiste iniciar sesión');
-                // alert('¡Oh no! parece que hubo un problema para iniciar sesión')
                 modal('¡Oh no! parece que hubo un problema para iniciar sesión')
-                pokebola.classList.add('invisible')
             }
         } catch (error) {
             console.error(error)
-            // alert('Ha sucedido un error pero no preocupes, no es tu culpa :D')
             modal('Ha sucedido un error pero no preocupes, no es tu culpa :D')
-            pokebola.classList.add('invisible')
         }
     })
 }
