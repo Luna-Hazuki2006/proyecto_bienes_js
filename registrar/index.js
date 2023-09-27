@@ -1,5 +1,5 @@
 let mensaje = document.getElementById('modal')
-// let boton = mensaje.querySelector('div div:last-of-type button')
+let boton = mensaje.querySelector('div div:last-of-type button')
 boton.addEventListener('click', () => {
     mensaje.style.display = 'none'
 })
@@ -14,8 +14,6 @@ function cargar() {
     let form = document.querySelector('form')
     let boton = document.querySelector('form button')
     boton.classList.add('ingresar')
-    let pokebola = document.querySelector('#pokebola')
-    pokebola.classList.add('invisible')
     form.addEventListener('submit', async (event) => {
         event.preventDefault()
         pokebola.classList.remove('invisible')
