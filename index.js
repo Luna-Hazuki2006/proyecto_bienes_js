@@ -21,6 +21,12 @@ function texto(tipo) {
     }
 }
 
+function calcular(fecha) {
+    const hoy = new Date();
+    let tiempo = hoy - fecha
+    
+}
+
 async function mostrar() {
     const respuesta = await fetch('https://graco-api.onrender.com/propiedad-principales', {
         method: 'GET', 
@@ -43,10 +49,10 @@ async function mostrar() {
             p.innerText = esta['precio'] + '$'
             div.appendChild(p)
             p = document.createElement('p')
-            p.innerText = 'Caracas'
+            p.innerText = esta['antiguedad']
             div.appendChild(p)
             p = document.createElement('p')
-            p.innerText = texto(esta['tipo'])
+            p.innerText = calcular(texto(esta['tipo']))
             div.appendChild(p)
             inmuebles.appendChild(div)
         }
