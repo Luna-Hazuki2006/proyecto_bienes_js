@@ -8,6 +8,19 @@ if (localStorage.getItem('token')) {
     console.log('por aca');
 }
 
+function texto(tipo) {
+    switch (tipo) {
+        case 1:
+            return 'Apartamento'
+        case 2: 
+            return 'Casa'
+        case 3: 
+            return 'Inmueble común'
+        default:
+            return 'Inmueble mágico'
+    }
+}
+
 async function mostrar() {
     const respuesta = await fetch('https://graco-api.onrender.com/propiedad-principales', {
         method: 'GET', 
@@ -33,7 +46,7 @@ async function mostrar() {
             p.innerText = 'Caracas'
             div.appendChild(p)
             p = document.createElement('p')
-            p.innerText = esta['tipo']
+            p.innerText = texto(esta['tipo'])
             div.appendChild(p)
             inmuebles.appendChild(div)
         }
