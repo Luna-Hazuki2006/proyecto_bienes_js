@@ -21,7 +21,6 @@ async function mostrar() {
         let inmuebles = document.querySelector('main section')
         inmuebles.innerHTML = ''
         for (const esta of lista) {
-            console.log(esta['imagenes']);
             let div = document.createElement('div')
             let img = document.createElement('img')
             img.src = esta['imagenes']
