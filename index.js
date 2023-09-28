@@ -52,7 +52,7 @@ async function mostrar() {
             p.innerText = esta['antiguedad']
             div.appendChild(p)
             p = document.createElement('p')
-            p.innerText = calcular(texto(esta['tipo']))
+            p.innerText = esta['tipo']
             div.appendChild(p)
             inmuebles.appendChild(div)
         }
