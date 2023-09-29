@@ -7,6 +7,16 @@ if (sessionStorage.getItem('token')) {
     console.log(registrables);
     console.log('por aca');
 }
+let lista = []
+
+function escribir() {
+    let todos = document.querySelectorAll('form input')
+    todos.forEach((e) => {
+        e.addEventListener('keydown', function() {
+            let todos = lista.filter((e) => e)
+        })
+    })
+}
 
 function texto(tipo) {
     switch (tipo) {
@@ -38,11 +48,16 @@ async function mostrar() {
     })
     const verdad = await respuesta.json()
     if (verdad['data']) {
-        let lista = verdad['data']
-        let inmuebles = document.querySelector('main section')
-        inmuebles.innerHTML = ''
+        lista = verdad['data']
+        llenar(lista)
+    }
+}
+
+function llenar(todo) {
+    let inmuebles = document.querySelector('main section')
+    inmuebles.innerHTML = ''
         let eleccion = 0
-        for (const esta of lista) {
+        for (const esta of todo) {
             let div = document.createElement('div')
             let img = document.createElement('img')
             if (eleccion == esta['imagenes'].length - 1) {
@@ -63,7 +78,7 @@ async function mostrar() {
             div.appendChild(p)
             inmuebles.appendChild(div)
         }
-    }
 }
 
 mostrar()
+escribir()
