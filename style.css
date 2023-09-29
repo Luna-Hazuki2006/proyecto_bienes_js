@@ -189,6 +189,7 @@ form > p {
 
 .inmuebles div:hover {
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 .inmuebles img {

@@ -1,5 +1,13 @@
+if (sessionStorage.getItem('token')) {
+    let visibles = document.querySelectorAll('header div div button, header div div a:nth-of-type(3) button')
+    console.log(visibles);
+    let registrables = document.querySelectorAll('header div div a:nth-of-type(1) button, header div div a:nth-of-type(2) button')
+    visibles.forEach((e) => e.classList.remove('oculto'))
+    registrables.forEach((e) => e.classList.add('oculto'))
+    console.log(registrables);
+    console.log('por aca');
+}
 let mensaje = document.getElementById('modal')
-
 window.onclick = function(event) {
     if (event.target == mensaje) {
         mensaje.style.display = "none";
@@ -32,7 +40,7 @@ function cargar() {
             if (verdad['success']) {
                 let jwt = verdad['data']['token']
                 console.log(jwt);
-                localStorage.setItem('token', jwt)
+                sessionStorage.setItem('token', jwt)
                 let cerrar = document.querySelector('header div div button')
                 let registrar = document.querySelectorAll('header div div a button')
                 cerrar.classList.remove('ocultar')

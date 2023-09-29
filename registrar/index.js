@@ -1,3 +1,13 @@
+if (sessionStorage.getItem('token')) {
+    let visibles = document.querySelectorAll('header div div button, header div div a:nth-of-type(3) button')
+    console.log(visibles);
+    let registrables = document.querySelectorAll('header div div a:nth-of-type(1) button, header div div a:nth-of-type(2) button')
+    visibles.forEach((e) => e.classList.remove('oculto'))
+    registrables.forEach((e) => e.classList.add('oculto'))
+    console.log(registrables);
+    console.log('por aca');
+}
+
 let mensaje = document.getElementById('modal')
 let boton = mensaje.querySelector('div div:last-of-type button')
 boton.addEventListener('click', () => {

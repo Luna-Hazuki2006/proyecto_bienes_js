@@ -1,4 +1,4 @@
-if (localStorage.getItem('token')) {
+if (sessionStorage.getItem('token')) {
     let visibles = document.querySelectorAll('header div div button, header div div a:nth-of-type(3) button')
     console.log(visibles);
     let registrables = document.querySelectorAll('header div div a:nth-of-type(1) button, header div div a:nth-of-type(2) button')
@@ -24,7 +24,9 @@ function texto(tipo) {
 function calcular(fecha) {
     const hoy = new Date();
     let tiempo = hoy - fecha
-    
+    tiempo = tiempo / 1000 / (365.25 * 24 * 60 * 60)
+    console.log(tiempo);
+    return Math.floor(tiempo) + ' años'
 }
 
 async function mostrar() {
@@ -38,18 +40,23 @@ async function mostrar() {
     if (verdad['data']) {
         let lista = verdad['data']
         let inmuebles = document.querySelector('main section')
+        let eleccion = 0
         inmuebles.innerHTML = ''
         for (const esta of lista) {
             let div = document.createElement('div')
             let img = document.createElement('img')
-            img.src = esta['imagenes']
+            if (eleccion == esta['imagenes'].length - 1) {
+                eleccion = 0
+            }
+            img.src = esta['imagenes'][eleccion]
             img.alt = 'Inmueble bonito'
+            eleccion++
             div.appendChild(img)
             let p = document.createElement('p')
-            p.innerText = esta['precio'] + '$'
+            p.innerText = esta['precio'] + ' $'
             div.appendChild(p)
             p = document.createElement('p')
-            p.innerText = esta['antiguedad']
+            p.innerText = calcular(new Date(esta['antiguedad']))
             div.appendChild(p)
             p = document.createElement('p')
             p.innerText = esta['tipo']
