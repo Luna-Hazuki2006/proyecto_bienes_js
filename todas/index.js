@@ -8,23 +8,50 @@ if (sessionStorage.getItem('token')) {
     console.log('por aca');
 }
 let lista = []
+console.log(document.getElementById('baños'));
+// function escribir() {
+//     let todos = document.querySelectorAll('form input')
+//     let reset = document.querySelector('form button')
+//     todos.forEach((e) => {
+//         e.addEventListener('change', function() {
+//             console.log('cambiando')
+//             let verdad = (todos[2].value != '' || todos[2].value != null)
+//             let propiedades_filtradas = lista.filter((e) => e['habitaciones'] == todos[1].value && 
+//                                             e['baños'] == todos[2].value &&
+//                                             calcular(e['antiguedad']) == calcular(todos[3].value) && 
+//                                             e['metroscuadrados'] == todos[4].value)
+//             llenar(propiedades_filtradas)
+//         })
+//     })
+//     reset.addEventListener('click', function() {
+//         llenar(lista)
+//     })
+// }
 
 function escribir() {
     let todos = document.querySelectorAll('form input')
     let reset = document.querySelector('form button')
+    let propiedades_filtradas = []
     todos.forEach((e) => {
-        e.addEventListener('change', function() {
-            console.log('cambiando')
-            let propiedades_filtradas = lista.filter((e) => e['habitaciones'] == todos[1].value || 
-                                            e['baños'] == todos[2].value ||
-                                            calcular(e['antiguedad']) == calcular(todos[3].value) || 
-                                            e['metroscuadrados'] == todos[4].value)
-            llenar(propiedades_filtradas)
+        e.addEventListener('change', function(event) {
+            const propiedadesAFiltar = propiedades_filtradas.length > 0 ? propiedades_filtradas : lista;
+            if(event.currentTarget.value)
+            {
+                propiedades_filtradas = [ 
+                    propiedadesAFiltar.filter((inmueble) => inmueble[event.currentTarget.id] == event.currentTarget.value)
+                ] 
+            }
+            else{
+              
+            }
+             
+            // llenar(propiedades_filtradas)
+            console.log(propiedades_filtradas);
         })
     })
     reset.addEventListener('click', function() {
         llenar(lista)
-    })
+      })
 }
 
 function texto(tipo) {
@@ -44,7 +71,7 @@ function calcular(fecha) {
     const hoy = new Date();
     let tiempo = hoy - fecha
     tiempo = tiempo / 1000 / (365.25 * 24 * 60 * 60)
-    console.log(tiempo);
+    // console.log(tiempo);
     return Math.floor(tiempo) + ' años'
 }
 
@@ -67,7 +94,7 @@ function llenar(todo) {
     inmuebles.innerHTML = ''
         let eleccion = 0
         for (const esta of todo) {
-            console.log(esta);
+            // console.log(esta);
             let div = document.createElement('div')
             let img = document.createElement('img')
             if (eleccion == esta['imagenes'].length - 1) {
