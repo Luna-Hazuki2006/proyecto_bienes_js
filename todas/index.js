@@ -11,10 +11,18 @@ let lista = []
 
 function escribir() {
     let todos = document.querySelectorAll('form input')
+    let reset = document.querySelector('form button')
     todos.forEach((e) => {
         e.addEventListener('keydown', function() {
-            let todos = lista.filter((e) => e)
+            let muchos = lista.filter((e) => e['habitaciones'] == todos[0] || 
+                                            e['baños'] == todos[1] ||
+                                            calcular(e['antiguedad']) == todos[2] || 
+                                            e['metroscuadrados'] == todos[3])
+            llenar(muchos)
         })
+    })
+    reset.addEventListener('click', function() {
+        llenar(lista)
     })
 }
 
@@ -58,6 +66,7 @@ function llenar(todo) {
     inmuebles.innerHTML = ''
         let eleccion = 0
         for (const esta of todo) {
+            console.log(esta);
             let div = document.createElement('div')
             let img = document.createElement('img')
             if (eleccion == esta['imagenes'].length - 1) {
@@ -76,6 +85,10 @@ function llenar(todo) {
             p = document.createElement('p')
             p.innerText = texto(esta['tipo'])
             div.appendChild(p)
+            div.addEventListener('click', function() {
+                sessionStorage.setItem('inmueble', JSON.stringify(esta))
+                
+            })
             inmuebles.appendChild(div)
         }
 }
