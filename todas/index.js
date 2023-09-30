@@ -87,7 +87,7 @@ function llenar(todo) {
             div.appendChild(p)
             div.addEventListener('click', function() {
                 sessionStorage.setItem('inmueble', JSON.stringify(esta))
-                
+                location.href = '../compra/'
             })
             inmuebles.appendChild(div)
         }
