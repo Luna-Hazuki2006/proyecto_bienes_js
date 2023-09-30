@@ -13,12 +13,13 @@ function escribir() {
     let todos = document.querySelectorAll('form input')
     let reset = document.querySelector('form button')
     todos.forEach((e) => {
-        e.addEventListener('keydown', function() {
-            let muchos = lista.filter((e) => e['habitaciones'] == todos[0] || 
-                                            e['baños'] == todos[1] ||
-                                            calcular(e['antiguedad']) == todos[2] || 
-                                            e['metroscuadrados'] == todos[3])
-            llenar(muchos)
+        e.addEventListener('change', function() {
+            console.log('cambiando')
+            let propiedades_filtradas = lista.filter((e) => e['habitaciones'] == todos[1].value || 
+                                            e['baños'] == todos[2].value ||
+                                            calcular(e['antiguedad']) == calcular(todos[3].value) || 
+                                            e['metroscuadrados'] == todos[4].value)
+            llenar(propiedades_filtradas)
         })
     })
     reset.addEventListener('click', function() {

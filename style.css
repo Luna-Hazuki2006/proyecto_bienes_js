@@ -151,14 +151,18 @@ form > p {
     color: red;
 }
 
-.seccion {
+.seccion, .compras {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     gap: 30px;
     padding: 30px;
 }
- 
+
+.seccion > section {
+    width: 45%;
+}
+
 .seccion > section:last-of-type div {
     display: flex;
     align-items: center;
@@ -166,8 +170,29 @@ form > p {
 }
 
 .seccion > section:last-of-type div button {
-    width: 100%;
+    width: 90%;
     margin: 5px;
+}
+
+.seccion > section:first-of-type div {
+    padding-left: 5px;
+}
+
+.compras > section:first-of-type {
+    
+}
+
+.imagenes {
+    width: 210px;
+    height: 140px;
+    position: relative;
+    margin: 0 auto 40px;
+    border: 1px solid #CCC;
+    perspective: 1100px;
+}
+
+.imagenes img {
+    width: 50%;
 }
 
 .inmuebles {
