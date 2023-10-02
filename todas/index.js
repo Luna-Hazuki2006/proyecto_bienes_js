@@ -55,13 +55,15 @@ function escribir() {
             for (const este of valores) {
                 if (verdad) {
                     verdad = false
-                    if (este['nombre'] == antiguedad) {
+                    if (este['nombre'] == 'antiguedad') {
+                        console.log('si pasa');
                         lista_filtrada = lista.filter((inmueble) => calcular(new Date(inmueble[este['nombre']])) == este['valor'])
                     } else {
                         lista_filtrada = lista.filter((inmueble) => inmueble[este['nombre']] == este['valor'])
                     }
                 } else {
-                    if (este['nombre'] == antiguedad) {
+                    if (este['nombre'] == 'antiguedad') {
+                        console.log('también pasa');
                         lista_filtrada = lista_filtrada.filter((inmueble) => calcular(new Date(inmueble[este['nombre']])) == este['valor'])
                     } else {
                         lista_filtrada = lista_filtrada.filter((inmueble) => inmueble[este['nombre']] == este['valor'])
