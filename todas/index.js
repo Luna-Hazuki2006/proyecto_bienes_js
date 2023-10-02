@@ -8,26 +8,7 @@ if (sessionStorage.getItem('token')) {
     console.log('por aca');
 }
 let lista = []
-let lista_filtrada = []
 console.log(document.getElementById('baños'));
-// function escribir() {
-//     let todos = document.querySelectorAll('form input')
-//     let reset = document.querySelector('form button')
-//     todos.forEach((e) => {
-//         e.addEventListener('change', function() {
-//             console.log('cambiando')
-//             let verdad = (todos[2].value != '' || todos[2].value != null)
-//             let propiedades_filtradas = lista.filter((e) => e['habitaciones'] == todos[1].value && 
-//                                             e['baños'] == todos[2].value &&
-//                                             calcular(e['antiguedad']) == calcular(todos[3].value) && 
-//                                             e['metroscuadrados'] == todos[4].value)
-//             llenar(propiedades_filtradas)
-//         })
-//     })
-//     reset.addEventListener('click', function() {
-//         llenar(lista)
-//     })
-// }
 
 function escribir() {
     let todos = document.querySelectorAll('form input')
@@ -50,6 +31,37 @@ function escribir() {
             } else {
                 propiedades_filtradas[e.id] = []
             }
+            let valores = []
+            for (const este of Object.keys(propiedades_filtradas)) {
+                if (propiedades_filtradas[este].length != 0) {
+                    let valor = {
+                        'nombre': este, 
+                        'valor': propiedades_filtradas[este][0][este]
+                    } 
+                    valores.push(valor)
+                }
+            } 
+            let lista_filtrada = []
+            console.log(valores);
+            let verdad = true
+            for (const este of valores) {
+                if (verdad) {
+                    verdad = false
+                    if (este['nombre'] == antiguedad) {
+                        lista_filtrada = lista.filter((inmueble) => calcular(new Date(inmueble[este['nombre']])) == calcular(new Date(este['valor'])))
+                        break
+                    } 
+                    lista_filtrada = lista.filter((inmueble) => inmueble[este['nombre']] == este['valor'])
+                } else {
+                    if (este['nombre'] == antiguedad) {
+                        lista_filtrada = lista_filtrada.filter((inmueble) => calcular(new Date(inmueble[este['nombre']])) == calcular(new Date(este['valor'])))
+                        break
+                    } 
+                    lista_filtrada = lista_filtrada.filter((inmueble) => inmueble[este['nombre']] == este['valor'])
+                }
+            }
+            console.log('filtrada');
+            console.log(lista_filtrada);
             // let valores = []
             // lista_filtrada = []
             // todos.forEach((dato) => {
