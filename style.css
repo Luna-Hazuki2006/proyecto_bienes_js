@@ -178,21 +178,56 @@ form > p {
     padding-left: 5px;
 }
 
-.compras > section:first-of-type {
-    
+.imagenes {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
 }
 
-.imagenes {
-    width: 210px;
-    height: 140px;
-    position: relative;
-    margin: 0 auto 40px;
-    border: 1px solid #CCC;
-    perspective: 1100px;
+.imagenes * {
+    box-sizing: border-box;
+}
+
+.imagenes > div {
+    display: none;
+    animation-name: desaparecer;
+    animation-duration: 1.5s;
+}
+
+.imagenes > div > div:first-of-type {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
 }
 
 .imagenes img {
-    width: 50%;
+    width: 100%;
+}
+
+.imagenes > a {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.imagenes > a:last-of-type {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.imagenes > a:hover {
+    background-color: rgba(0,0,0,0.8);
 }
 
 .inmuebles {
@@ -279,3 +314,12 @@ form > p {
         opacity:1;
     }
 }
+
+@keyframes desaparecer {
+    from {
+        opacity: 0.4;
+    }
+    to {
+        opacity: 1;
+    }
+  }
