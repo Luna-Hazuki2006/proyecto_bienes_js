@@ -8,6 +8,7 @@ if (sessionStorage.getItem('token')) {
     console.log('por aca');
 }
 let lista = []
+let lista_filtrada = []
 console.log(document.getElementById('baños'));
 // function escribir() {
 //     let todos = document.querySelectorAll('form input')
@@ -31,27 +32,60 @@ console.log(document.getElementById('baños'));
 function escribir() {
     let todos = document.querySelectorAll('form input')
     let reset = document.querySelector('form button')
-    let propiedades_filtradas = []
+    let propiedades_filtradas = {}
     todos.forEach((e) => {
-        e.addEventListener('change', function(event) {
-            const propiedadesAFiltar = propiedades_filtradas.length > 0 ? propiedades_filtradas : lista;
-            if(event.currentTarget.value)
-            {
-                propiedades_filtradas = [ 
-                    propiedadesAFiltar.filter((inmueble) => inmueble[event.currentTarget.id] == event.currentTarget.value)
-                ] 
+        propiedades_filtradas[e.id] = []
+    })
+    console.log(Object.keys(propiedades_filtradas))
+    todos.forEach((e) => {
+        e.addEventListener('change', function() {
+            if (e.value) {
+                console.log(e.id);
+                if (e.type == 'date') {
+                    console.log(calcular(new Date(e.value)));
+                    propiedades_filtradas[e.id] = lista.filter((inmueble) => calcular(new Date(inmueble[e.id])) == calcular(new Date(e.value)))
+                } else {
+                    propiedades_filtradas[e.id] = lista.filter((inmueble) => inmueble[e.id] == e.value)
+                }
+            } else {
+                propiedades_filtradas[e.id] = []
             }
-            else{
-              
-            }
-             
+            // let valores = []
+            // lista_filtrada = []
+            // todos.forEach((dato) => {
+            //     console.log('pasa');
+            //     if (propiedades_filtradas[dato.id] != []) {
+            //         console.log('esto');
+            //         console.log(propiedades_filtradas[dato.id]);
+            //         let valor = {
+            //             'nombre': dato.id, 
+            //             'valor': propiedades_filtradas[dato.id][0][dato.id]
+            //         }
+            //         valores.push(valor)
+            //     } 
+            // })
+            // console.log(valores);
+            // let verdad = true
+            // valores.forEach((dato) => {
+            //     if (verdad) {
+            //         verdad = false
+            //         lista_filtrada = lista.filter((inmueble) => inmueble[dato['nombre']] == dato['valor'])
+            //     } else {
+            //         lista_filtrada = lista_filtrada.filter((inmueble) => inmueble[dato['nombre']] == dato['valor'])
+            //     }
+            // })
             // llenar(propiedades_filtradas)
             console.log(propiedades_filtradas);
+            
         })
     })
     reset.addEventListener('click', function() {
+        todos.forEach((e) => {
+            propiedades_filtradas[e.id] = []
+        })
+        console.log(propiedades_filtradas);
         llenar(lista)
-      })
+    })
 }
 
 function texto(tipo) {
