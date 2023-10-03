@@ -1,4 +1,4 @@
-if (sessionStorage.getItem('token')) {
+if (localStorage.getItem('token')) {
     let visibles = document.querySelectorAll('header div div button, header div div a:nth-of-type(3) button')
     console.log(visibles);
     let registrables = document.querySelectorAll('header div div a:nth-of-type(1) button, header div div a:nth-of-type(2) button')

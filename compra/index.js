@@ -1,4 +1,4 @@
-if (sessionStorage.getItem('token')) {
+if (localStorage.getItem('token')) {
     let visibles = document.querySelectorAll('header div div button, header div div a:nth-of-type(3) button')
     console.log(visibles);
     let registrables = document.querySelectorAll('header div div a:nth-of-type(1) button, header div div a:nth-of-type(2) button')
@@ -20,7 +20,7 @@ function calcular(fecha) {
 }
 
 function inicial() {
-    let inmueble = JSON.parse(sessionStorage.getItem('inmueble'))
+    let inmueble = JSON.parse(localStorage.getItem('inmueble'))
     console.log(inmueble);
     let info = document.querySelectorAll('main section:last-of-type p')
     let imagenes = document.querySelector('main section:first-of-type div')

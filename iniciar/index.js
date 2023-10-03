@@ -1,4 +1,4 @@
-if (sessionStorage.getItem('token')) {
+if (localStorage.getItem('token')) {
     let visibles = document.querySelectorAll('header div div button, header div div a:nth-of-type(3) button')
     console.log(visibles);
     let registrables = document.querySelectorAll('header div div a:nth-of-type(1) button, header div div a:nth-of-type(2) button')
@@ -40,7 +40,7 @@ function cargar() {
             if (verdad['success']) {
                 let jwt = verdad['data']['token']
                 console.log(jwt);
-                sessionStorage.setItem('token', jwt)
+                localStorage.setItem('token', jwt)
                 let cerrar = document.querySelector('header div div button')
                 let registrar = document.querySelectorAll('header div div a button')
                 cerrar.classList.remove('ocultar')
