@@ -1,12 +1,26 @@
-if (localStorage.getItem('token')) {
+function prueba() {
     let visibles = document.querySelectorAll('header div div button, header div div a:nth-of-type(3) button')
     console.log(visibles);
     let registrables = document.querySelectorAll('header div div a:nth-of-type(1) button, header div div a:nth-of-type(2) button')
-    visibles.forEach((e) => e.classList.remove('oculto'))
-    registrables.forEach((e) => e.classList.add('oculto'))
-    console.log(registrables);
-    console.log('por aca');
+    if (localStorage.getItem('token')) {
+        visibles.forEach((e) => e.classList.remove('oculto'))
+        registrables.forEach((e) => e.classList.add('oculto'))
+        let cerrar = document.querySelector('header div div > button')
+        console.log(cerrar);
+        cerrar.addEventListener('click', function() {
+            localStorage.removeItem('token')
+            visibles.forEach((e) => e.classList.add('oculto'))
+            registrables.forEach((e) => e.classList.remove('oculto'))
+        })
+        console.log(registrables);
+        console.log('por aca');
+    } else {
+        visibles.forEach((e) => e.classList.add('oculto'))
+        registrables.forEach((e) => e.classList.remove('oculto'))
+    }
 }
+
+prueba()
 
 let mensaje = document.getElementById('modal')
 window.onclick = function(event) {
@@ -25,11 +39,13 @@ async function cargar() {
             }
         })
         const verdad = await respuesta.json()
+        console.log(verdad);
         if (verdad['success']) {
             let data = verdad['data']
             let p = document.querySelectorAll('main p')
-            p[0].innerText = 'Nombres: ' + data['nombre']
-            p[1].innerText = 'Apellidos: ' + data['apellido']
+            p[0].innerHTML = 'Nombres: ' + data['nombre']
+            p[1].innerHTML = 'Apellidos: ' + data['apellido']
+            console.log('los p');
             console.log(p);
             modal('Felicidades, inicio de sesión exitoso', '../todas/')
         } else {

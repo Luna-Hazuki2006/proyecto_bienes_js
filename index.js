@@ -1,12 +1,26 @@
-if (localStorage.getItem('token')) {
+function prueba() {
     let visibles = document.querySelectorAll('header div div button, header div div a:nth-of-type(3) button')
     console.log(visibles);
     let registrables = document.querySelectorAll('header div div a:nth-of-type(1) button, header div div a:nth-of-type(2) button')
-    visibles.forEach((e) => e.classList.remove('oculto'))
-    registrables.forEach((e) => e.classList.add('oculto'))
-    console.log(registrables);
-    console.log('por aca');
+    if (localStorage.getItem('token')) {
+        visibles.forEach((e) => e.classList.remove('oculto'))
+        registrables.forEach((e) => e.classList.add('oculto'))
+        let cerrar = document.querySelector('header div div > button')
+        console.log(cerrar);
+        cerrar.addEventListener('click', function() {
+            localStorage.removeItem('token')
+            visibles.forEach((e) => e.classList.add('oculto'))
+            registrables.forEach((e) => e.classList.remove('oculto'))
+        })
+        console.log(registrables);
+        console.log('por aca');
+    } else {
+        visibles.forEach((e) => e.classList.add('oculto'))
+        registrables.forEach((e) => e.classList.remove('oculto'))
+    }
 }
+
+prueba()
 
 function texto(tipo) {
     switch (tipo) {
@@ -25,7 +39,6 @@ function calcular(fecha) {
     const hoy = new Date();
     let tiempo = hoy - fecha
     tiempo = tiempo / 1000 / (365.25 * 24 * 60 * 60)
-    console.log(tiempo);
     return Math.floor(tiempo) + ' años'
 }
 
