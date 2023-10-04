@@ -1,4 +1,4 @@
-function prueba() {
+async function prueba() {
     let visibles = document.querySelectorAll('header div div button, header div div a:nth-of-type(3) button')
     console.log(visibles);
     let registrables = document.querySelectorAll('header div div a:nth-of-type(1) button, header div div a:nth-of-type(2) button')
@@ -18,6 +18,9 @@ function prueba() {
         visibles.forEach((e) => e.classList.add('oculto'))
         registrables.forEach((e) => e.classList.remove('oculto'))
     }
+    console.log('esperando');
+    await cargar()
+    console.log('terminó');
 }
 
 prueba()
@@ -45,6 +48,10 @@ async function cargar() {
             let p = document.querySelectorAll('main p')
             p[0].innerHTML = 'Nombres: ' + data['nombre']
             p[1].innerHTML = 'Apellidos: ' + data['apellido']
+            p[2].innerHTML = 'Correo: ' + data['mail']
+            p[3].innerHTML = 'Nacimiento: ' + data['nacimiento']
+            p[4].innerHTML = 'Cédula: ' + data['dni']
+            p[5].innerHTML = 'Dirección: ' + data['direccion']
             console.log('los p');
             console.log(p);
             modal('Felicidades, inicio de sesión exitoso', '../todas/')
@@ -81,5 +88,3 @@ function modal(texto, pasar = undefined) {
         })
     }
 }
-
-cargar()
