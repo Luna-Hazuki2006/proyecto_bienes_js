@@ -82,7 +82,7 @@ function darBotones() {
 
 async function comprar() {
     let boton = document.querySelector('main button')
-    console.log(boton);
+    
 }
 
 function calcular(fecha) {
