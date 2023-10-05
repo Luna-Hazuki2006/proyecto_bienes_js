@@ -55,7 +55,6 @@ async function cargar() {
             p[5].innerHTML = 'Dirección: ' + data['direccion']
             console.log('los p');
             console.log(p);
-            modal('Felicidades, inicio de sesión exitoso', '../todas/')
         } else {
             console.log('¡Oh no! No pudiste iniciar sesión');
             modal('¡Oh no! parece que hubo un problema, trata de iniciar sesión de nuevo', '../iniciar/')
