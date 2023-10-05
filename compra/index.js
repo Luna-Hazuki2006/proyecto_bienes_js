@@ -5,13 +5,13 @@ function prueba() {
     if (localStorage.getItem('token')) {
         visibles.forEach((e) => e.classList.remove('oculto'))
         registrables.forEach((e) => e.classList.add('oculto'))
-        let cerrar = document.querySelector('header div div > button')
-        console.log(cerrar);
-        cerrar.addEventListener('click', function() {
-            localStorage.removeItem('token')
-            visibles.forEach((e) => e.classList.add('oculto'))
-            registrables.forEach((e) => e.classList.remove('oculto'))
-        })
+        // let cerrar = document.querySelector('header div div > button')
+        // console.log(cerrar);
+        // cerrar.addEventListener('click', function() {
+        //     localStorage.removeItem('token')
+        //     visibles.forEach((e) => e.classList.add('oculto'))
+        //     registrables.forEach((e) => e.classList.remove('oculto'))
+        // })
         console.log(registrables);
         console.log('por aca');
     } else {
@@ -23,6 +23,24 @@ function prueba() {
 prueba()
 
 let indiceImagen = 1;
+
+function pasar(numero) {
+    mostrarImagenes(indiceImagen += numero)
+}
+
+function mostrarImagenes(numero) {
+    let imagenes = document.querySelectorAll(".imagenes > div");
+    if (numero > imagenes.length) {
+        indiceImagen = 1
+    }
+    if (numero < 1) {
+        indiceImagen = imagenes.length
+    }
+    for (let i = 0; i < imagenes.length; i++) {
+        imagenes[i].style.display = "none";
+    }
+    imagenes[indiceImagen-1].style.display = "block";
+} 
 
 function calcular(fecha) {
     const hoy = new Date();
@@ -72,27 +90,5 @@ function inicial() {
     imagenes.appendChild(a)
     mostrarImagenes(indiceImagen);
 }
-
-function pasar(numero) {
-    mostrarImagenes(indiceImagen += numero)
-}
-
-function actual(numero) {
-    mostrarImagenes(indiceImagen = numero);
-}
-
-function mostrarImagenes(numero) {
-    let imagenes = document.querySelectorAll(".imagenes > div");
-    if (numero > imagenes.length) {
-        indiceImagen = 1
-    }
-    if (numero < 1) {
-        indiceImagen = imagenes.length
-    }
-    for (let i = 0; i < imagenes.length; i++) {
-        imagenes[i].style.display = "none";
-    }
-    imagenes[indiceImagen-1].style.display = "block";
-} 
 
 inicial()
