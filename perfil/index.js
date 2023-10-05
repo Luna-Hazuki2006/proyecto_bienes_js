@@ -5,13 +5,14 @@ async function prueba() {
     if (localStorage.getItem('token')) {
         visibles.forEach((e) => e.classList.remove('oculto'))
         registrables.forEach((e) => e.classList.add('oculto'))
-        let cerrar = document.querySelector('header div div > button')
-        console.log(cerrar);
-        cerrar.addEventListener('click', function() {
-            localStorage.removeItem('token')
-            visibles.forEach((e) => e.classList.add('oculto'))
-            registrables.forEach((e) => e.classList.remove('oculto'))
-        })
+        // let cerrar = document.querySelector('header div div > button')
+        // console.log(cerrar);
+        // cerrar.addEventListener('click', function() {
+        //     localStorage.removeItem('token')
+        //     visibles.forEach((e) => e.classList.add('oculto'))
+        //     registrables.forEach((e) => e.classList.remove('oculto'))
+        //     modal('La sesión ha sido exitósamente cerrada')
+        // })
         console.log(registrables);
         console.log('por aca');
     } else {
