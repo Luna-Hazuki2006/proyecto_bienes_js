@@ -11,7 +11,7 @@ function prueba() {
             sessionStorage.removeItem('token')
             visibles.forEach((e) => e.classList.add('oculto'))
             registrables.forEach((e) => e.classList.remove('oculto'))
-            modal('La sesión ha sido exitósamente cerrada')
+            modal('La sesión ha sido exitósamente cerrada', '../')
         })
         console.log(registrables);
         console.log('por aca');
@@ -61,7 +61,7 @@ function cargar() {
                 let registrar = document.querySelectorAll('header div div a button')
                 cerrar.classList.remove('ocultar')
                 registrar.forEach((e) => e.classList.add('ocultar'))
-                modal('Felicidades, inicio de sesión exitoso', '../todas/')
+                modal('Felicidades, inicio de sesión exitoso', '../')
             } else {
                 console.log('¡Oh no! No pudiste iniciar sesión');
                 modal('¡Oh no! parece que hubo un problema para iniciar sesión')

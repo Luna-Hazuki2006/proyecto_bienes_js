@@ -11,6 +11,7 @@ function prueba() {
             sessionStorage.removeItem('token')
             visibles.forEach((e) => e.classList.add('oculto'))
             registrables.forEach((e) => e.classList.remove('oculto'))
+            modal('La sesión ha sido exitósamente cerrada', '../')
         })
         console.log(registrables);
         console.log('por aca');
@@ -34,6 +35,14 @@ window.onclick = function(event) {
     }
 }
 
+function calcular(fecha) {
+    const hoy = new Date();
+    let tiempo = hoy - fecha
+    tiempo = tiempo / 1000 / (365.25 * 24 * 60 * 60)
+    años = Math.floor(tiempo)
+    return años + ((años == 1) ? ' año' : ' años')
+}
+
 function cargar() {
     let form = document.querySelector('form')
     let boton = document.querySelector('form button')
@@ -52,6 +61,11 @@ function cargar() {
         let repetida = data.get('repetida')
         if (clave != repetida) {
             modal('¡Oh no! las contrasñas no son iguales\nTrata de no equivocarte :3')
+            return
+        }
+        let edad = calcular(new Date(nacimiento)).split(' ')
+        if (edad < 18) {
+            modal('¡Oh no! ')
             return
         }
         try {
@@ -84,11 +98,28 @@ function cargar() {
     })
 }
 
-function modal(texto) {
+function modal(texto, pasar = undefined) {
     let p = mensaje.querySelector('div div:first-of-type p')
     console.log(texto);
     p.innerHTML = texto
     mensaje.style.display = 'block'
+    let boton = mensaje.querySelector('div div:last-of-type button')
+    if (pasar != undefined) {
+        console.log('pasar');
+        boton.addEventListener('click', () => {
+            mensaje.style.display = 'none'
+            location.href = pasar
+            let nuevo = mensaje.cloneNode(true)
+            mensaje.parentNode.replaceChild(nuevo, mensaje)
+        })
+    } else {
+        console.log('no pasar');
+        boton.addEventListener('click', () => {
+            mensaje.style.display = 'none'
+            let nuevo = mensaje.cloneNode(true)
+            mensaje.parentNode.replaceChild(nuevo, mensaje)
+        })
+    }
 }
 
 cargar()

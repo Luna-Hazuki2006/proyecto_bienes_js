@@ -11,7 +11,7 @@ async function prueba() {
             sessionStorage.removeItem('token')
             visibles.forEach((e) => e.classList.add('oculto'))
             registrables.forEach((e) => e.classList.remove('oculto'))
-            modal('La sesión ha sido exitósamente cerrada')
+            modal('La sesión ha sido exitósamente cerrada', '../')
         })
         console.log(registrables);
         console.log('por aca');
@@ -23,3 +23,27 @@ async function prueba() {
 }
 
 prueba()
+
+function modal(texto, pasar = undefined) {
+    let p = mensaje.querySelector('div div:first-of-type p')
+    console.log(texto);
+    p.innerHTML = texto
+    mensaje.style.display = 'block'
+    let boton = mensaje.querySelector('div div:last-of-type button')
+    if (pasar != undefined) {
+        console.log('pasar');
+        boton.addEventListener('click', () => {
+            mensaje.style.display = 'none'
+            location.href = pasar
+            let nuevo = mensaje.cloneNode(true)
+            mensaje.parentNode.replaceChild(nuevo, mensaje)
+        })
+    } else {
+        console.log('no pasar');
+        boton.addEventListener('click', () => {
+            mensaje.style.display = 'none'
+            let nuevo = mensaje.cloneNode(true)
+            mensaje.parentNode.replaceChild(nuevo, mensaje)
+        })
+    }
+}

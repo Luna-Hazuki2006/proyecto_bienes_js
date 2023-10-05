@@ -40,7 +40,8 @@ function calcular(fecha) {
     const hoy = new Date();
     let tiempo = hoy - fecha
     tiempo = tiempo / 1000 / (365.25 * 24 * 60 * 60)
-    return Math.floor(tiempo) + ' años'
+    años = Math.floor(tiempo)
+    return años + ((años == 1) ? ' año' : ' años')
 }
 
 async function mostrar() {

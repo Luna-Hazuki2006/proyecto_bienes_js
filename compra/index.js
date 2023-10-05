@@ -11,7 +11,7 @@ function prueba() {
             sessionStorage.removeItem('token')
             visibles.forEach((e) => e.classList.add('oculto'))
             registrables.forEach((e) => e.classList.remove('oculto'))
-            modal('La sesión ha sido exitósamente cerrada')
+            modal('La sesión ha sido exitósamente cerrada', '../')
         })
         console.log(registrables);
         console.log('por aca');
