@@ -75,6 +75,10 @@ async function mostrar() {
             p = document.createElement('p')
             p.innerText = esta['tipo']
             div.appendChild(p)
+            div.addEventListener('click', function() {
+                localStorage.setItem('inmueble', JSON.stringify(esta))
+                location.href = '/compra/'
+            })
             inmuebles.appendChild(div)
         }
     }
