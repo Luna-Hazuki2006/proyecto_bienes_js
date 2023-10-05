@@ -2,16 +2,17 @@ function prueba() {
     let visibles = document.querySelectorAll('header div div button, header div div a:nth-of-type(3) button')
     console.log(visibles);
     let registrables = document.querySelectorAll('header div div a:nth-of-type(1) button, header div div a:nth-of-type(2) button')
-    if (localStorage.getItem('token')) {
+    if (sessionStorage.getItem('token')) {
         visibles.forEach((e) => e.classList.remove('oculto'))
         registrables.forEach((e) => e.classList.add('oculto'))
-        // let cerrar = document.querySelector('header div div > button')
-        // console.log(cerrar);
-        // cerrar.addEventListener('click', function() {
-        //     localStorage.removeItem('token')
-        //     visibles.forEach((e) => e.classList.add('oculto'))
-        //     registrables.forEach((e) => e.classList.remove('oculto'))
-        // })
+        let cerrar = document.querySelector('header div div > button')
+        console.log(cerrar);
+        cerrar.addEventListener('click', function() {
+            sessionStorage.removeItem('token')
+            visibles.forEach((e) => e.classList.add('oculto'))
+            registrables.forEach((e) => e.classList.remove('oculto'))
+            modal('La sesión ha sido exitósamente cerrada')
+        })
         console.log(registrables);
         console.log('por aca');
     } else {
@@ -23,6 +24,7 @@ function prueba() {
 prueba()
 
 let indiceImagen = 1;
+const inmueble = JSON.parse(localStorage.getItem('inmueble'))
 
 function pasar(numero) {
     mostrarImagenes(indiceImagen += numero)
@@ -42,17 +44,56 @@ function mostrarImagenes(numero) {
     imagenes[indiceImagen-1].style.display = "block";
 } 
 
+function darBotones() {
+    if (inmueble['estado'] != 2) {
+        let boton = document.querySelector('main button')
+        boton.innerText = '¡Visitar!'
+        boton.addEventListener('click', async function() {
+            try {
+                const respuesta = fetch('https://graco-api.onrender.com/visitar-propiedad', {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': sessionStorage.getItem('token')
+                    }, 
+                    body: JSON.stringify({
+                        'propiedad': inmueble['id']
+                    })
+                })
+                const verdad = await respuesta.json()
+                if (verdad['success']) {
+                    modal(verdad['message'])
+                    let nuevo = boton.cloneNode(true)
+                    nuevo.innerText = '¡Comprar!'
+                    boton.parentNode.replaceChild(nuevo, boton)
+                    boton.addEventListener('click', async function() {
+                        await comprar()
+                    })
+                } else {
+                    modal('¡Oh no! Algo salió mal D:')
+                }
+            } catch (error) {
+                
+            }
+        })
+    }
+    console.log(inmueble);
+}
+
+async function comprar() {
+    let boton = document.querySelector('main button')
+    console.log(boton);
+}
+
 function calcular(fecha) {
     const hoy = new Date();
     let tiempo = hoy - fecha
     tiempo = tiempo / 1000 / (365.25 * 24 * 60 * 60)
-    console.log(tiempo);
     años = Math.floor(tiempo)
     return años + ((años == 1) ? ' año' : ' años')
 }
 
 function inicial() {
-    let inmueble = JSON.parse(localStorage.getItem('inmueble'))
     console.log(inmueble);
     let info = document.querySelectorAll('main section:last-of-type p')
     let imagenes = document.querySelector('main section:first-of-type div')
@@ -89,6 +130,7 @@ function inicial() {
     a.innerText = '>'
     imagenes.appendChild(a)
     mostrarImagenes(indiceImagen);
+    darBotones()
 }
 
 inicial()

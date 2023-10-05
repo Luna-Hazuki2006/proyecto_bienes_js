@@ -2,17 +2,17 @@ async function prueba() {
     let visibles = document.querySelectorAll('header div div button, header div div a:nth-of-type(3) button')
     console.log(visibles);
     let registrables = document.querySelectorAll('header div div a:nth-of-type(1) button, header div div a:nth-of-type(2) button')
-    if (localStorage.getItem('token')) {
+    if (sessionStorage.getItem('token')) {
         visibles.forEach((e) => e.classList.remove('oculto'))
         registrables.forEach((e) => e.classList.add('oculto'))
-        // let cerrar = document.querySelector('header div div > button')
-        // console.log(cerrar);
-        // cerrar.addEventListener('click', function() {
-        //     localStorage.removeItem('token')
-        //     visibles.forEach((e) => e.classList.add('oculto'))
-        //     registrables.forEach((e) => e.classList.remove('oculto'))
-        //     modal('La sesión ha sido exitósamente cerrada')
-        // })
+        let cerrar = document.querySelector('header div div > button')
+        console.log(cerrar);
+        cerrar.addEventListener('click', function() {
+            sessionStorage.removeItem('token')
+            visibles.forEach((e) => e.classList.add('oculto'))
+            registrables.forEach((e) => e.classList.remove('oculto'))
+            modal('La sesión ha sido exitósamente cerrada')
+        })
         console.log(registrables);
         console.log('por aca');
     } else {
@@ -39,7 +39,7 @@ async function cargar() {
             method: 'GET', 
             headers: {
                 'Content-Type': 'application/json', 
-                'Authorization': localStorage.getItem('token')
+                'Authorization': sessionStorage.getItem('token')
             }
         })
         const verdad = await respuesta.json()
