@@ -82,10 +82,12 @@ async function cargar() {
         modal('¡Oh no! Sucedió un error grave')
     }
     let forma = document.querySelector('form')
-    forma.addEventListener('submit', async () => {
+    forma.addEventListener('submit', async (event) => {
+        event.preventDefault()
         let data = new FormData(forma)
         let cedula = data.get('cedula')
         let nombre = data.get('nombre')
+        console.log(nombre);
         let apellido = data.get('apellido')
         let nacimiento = new Date(data.get('nacimiento'))
         let direccion = data.get('direccion')
@@ -111,7 +113,8 @@ async function cargar() {
                 modal('¡Oh no! Sucedió un problema al modificar el perfil')
             }
         } catch (error) {
-            
+            console.log(error);
+            modal('¡Oh no! Sucedió un error grave')
         }
     })
 }
