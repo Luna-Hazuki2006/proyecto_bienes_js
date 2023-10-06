@@ -158,7 +158,6 @@ function llenar(todo) {
     inmuebles.innerHTML = ''
         let eleccion = 0
         for (const esta of todo) {
-            // console.log(esta);
             let div = document.createElement('div')
             let img = document.createElement('img')
             if (eleccion == esta['imagenes'].length - 1) {

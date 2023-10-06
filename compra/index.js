@@ -66,6 +66,15 @@ function darBotones() {
         boton.innerText = '¡Visitar!'
         boton.addEventListener('click', async function() {
             try {
+                const usuario = await fetch('https://graco-api.onrender.com/perfil', {
+                    method: 'GET', 
+                    headers: {
+                        'Content-Type': 'application/json', 
+                        'Authorization': sessionStorage.getItem('token')
+                    }
+                })
+                const usuarioData = await usuario.json()
+                console.log(usuario['data']);
                 const respuesta = fetch('https://graco-api.onrender.com/visitar-propiedad', {
                     method: 'POST', 
                     headers: {
@@ -77,7 +86,7 @@ function darBotones() {
                     })
                 })
                 console.log(respuesta);
-                const verdad = (await respuesta).json()
+                const verdad = (await respuesta).json
                 if (verdad['success']) {
                     modal(verdad['message'])
                     let nuevo = boton.cloneNode(true)
@@ -93,6 +102,8 @@ function darBotones() {
                 console.log(error);
             }
         })
+    } else if (inmueble['estado'] == 2) {
+        comprar()
     }
     console.log(inmueble);
 }

@@ -19,7 +19,7 @@ async function prueba() {
         visibles.forEach((e) => e.classList.add('oculto'))
         registrables.forEach((e) => e.classList.remove('oculto'))
     }
-    // await cargar()
+    cargar()
 }
 
 prueba()
@@ -33,6 +33,41 @@ boton.addEventListener('click', () => {
 window.onclick = function(event) {
     if (event.target == mensaje) {
         mensaje.style.display = "none";
+    }
+}
+
+async function cargar() {
+    try {
+        const respuesta = await fetch('https://graco-api.onrender.com/historial', {
+            method: 'GET', 
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": sessionStorage.getItem('token')
+            }
+        })
+        const verdad = await respuesta.json()
+        if (verdad['success']) {
+            console.log(verdad['data']);
+            let cosa = document.querySelector('main section')
+            let div = document.createElement('div')
+            let img = document.createElement('img')
+            img.src = esta['imagenes'][0]
+            img.alt = 'Inmueble bonito'
+            eleccion++
+            div.appendChild(img)
+            let p = document.createElement('p')
+            p.innerText = esta['precio'] + ' $'
+            div.appendChild(p)
+            p = document.createElement('p')
+            p.innerText = calcular(new Date(esta['antiguedad']))
+            div.appendChild(p)
+            p = document.createElement('p')
+            p.innerText = texto(esta['tipo'])
+            div.appendChild(p)
+            cosa.appendChild(div)
+        }
+    } catch (error) {
+        
     }
 }
 
