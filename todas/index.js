@@ -23,6 +23,18 @@ function prueba() {
 
 prueba()
 
+let mensaje = document.getElementById('modal')
+let boton = mensaje.querySelector('#modal button')
+boton.addEventListener('click', () => {
+    mensaje.style.display = 'none'
+})
+
+window.onclick = function(event) {
+    if (event.target == mensaje) {
+        mensaje.style.display = "none";
+    }
+}
+
 let lista = []
 console.log(document.getElementById('baños'));
 
@@ -90,7 +102,6 @@ function escribir() {
             console.log(lista_filtrada);
             llenar(lista_filtrada)
             console.log(propiedades_filtradas);
-            
         })
     })
     reset.addEventListener('click', function() {
@@ -133,6 +144,11 @@ async function mostrar() {
     const verdad = await respuesta.json()
     if (verdad['data']) {
         lista = verdad['data']
+        console.log(lista);
+        console.log(lista.filter((sus) => sus['estado'] == 0));
+        console.log(lista.filter((sus) => sus['estado'] == 1));
+        console.log(lista.filter((sus) => sus['estado'] == 2));
+        console.log(lista.filter((sus) => sus['estado'] == 3));
         llenar(lista)
     }
 }
@@ -173,25 +189,25 @@ mostrar()
 escribir()
 
 function modal(texto, pasar = undefined) {
-    let p = mensaje.querySelector('div div:first-of-type p')
+    let p = mensaje.querySelector('#modal p')
     console.log(texto);
     p.innerHTML = texto
     mensaje.style.display = 'block'
-    let boton = mensaje.querySelector('div div:last-of-type button')
+    let boton = mensaje.querySelector('#modal button')
     if (pasar != undefined) {
         console.log('pasar');
         boton.addEventListener('click', () => {
             mensaje.style.display = 'none'
             location.href = pasar
-            let nuevo = mensaje.cloneNode(true)
-            mensaje.parentNode.replaceChild(nuevo, mensaje)
+            let nuevo = boton.cloneNode(true)
+            boton.parentNode.replaceChild(nuevo, boton)
         })
     } else {
         console.log('no pasar');
         boton.addEventListener('click', () => {
             mensaje.style.display = 'none'
-            let nuevo = mensaje.cloneNode(true)
-            mensaje.parentNode.replaceChild(nuevo, mensaje)
+            let nuevo = boton.cloneNode(true)
+            boton.parentNode.replaceChild(nuevo, boton)
         })
     }
 }

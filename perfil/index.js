@@ -27,6 +27,11 @@ async function prueba() {
 prueba()
 
 let mensaje = document.getElementById('modal')
+let boton = mensaje.querySelector('#modal button')
+boton.addEventListener('click', () => {
+    mensaje.style.display = 'none'
+})
+
 window.onclick = function(event) {
     if (event.target == mensaje) {
         mensaje.style.display = "none";
@@ -66,25 +71,25 @@ async function cargar() {
 }
 
 function modal(texto, pasar = undefined) {
-    let p = mensaje.querySelector('div div:first-of-type p')
+    let p = mensaje.querySelector('#modal p')
     console.log(texto);
     p.innerHTML = texto
     mensaje.style.display = 'block'
-    let boton = mensaje.querySelector('div div:last-of-type button')
+    let boton = mensaje.querySelector('#modal button')
     if (pasar != undefined) {
         console.log('pasar');
         boton.addEventListener('click', () => {
             mensaje.style.display = 'none'
             location.href = pasar
-            let nuevo = mensaje.cloneNode(true)
-            mensaje.parentNode.replaceChild(nuevo, mensaje)
+            let nuevo = boton.cloneNode(true)
+            boton.parentNode.replaceChild(nuevo, boton)
         })
     } else {
         console.log('no pasar');
         boton.addEventListener('click', () => {
             mensaje.style.display = 'none'
-            let nuevo = mensaje.cloneNode(true)
-            mensaje.parentNode.replaceChild(nuevo, mensaje)
+            let nuevo = boton.cloneNode(true)
+            boton.parentNode.replaceChild(nuevo, boton)
         })
     }
 }

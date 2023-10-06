@@ -291,7 +291,9 @@ form > p {
     border-radius: 10px;
 }
 
-
+.desaparecer {
+    display: none;
+}
 
 @keyframes animartop {
     from {

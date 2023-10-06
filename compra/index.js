@@ -23,6 +23,18 @@ function prueba() {
 
 prueba()
 
+let mensaje = document.getElementById('modal')
+let botonModal = mensaje.querySelector('#modal button')
+botonModal.addEventListener('click', () => {
+    mensaje.style.display = 'none'
+})
+
+window.onclick = function(event) {
+    if (event.target == mensaje) {
+        mensaje.style.display = "none";
+    }
+}
+
 let indiceImagen = 1;
 const inmueble = JSON.parse(localStorage.getItem('inmueble'))
 
@@ -45,8 +57,12 @@ function mostrarImagenes(numero) {
 } 
 
 function darBotones() {
-    if (inmueble['estado'] != 2) {
-        let boton = document.querySelector('main button')
+    let boton = document.querySelector('main button')
+    if (!sessionStorage.getItem('token')) {
+        boton.classList.add('desaparecer')
+        return
+    }
+    if (inmueble['estado'] == 1) {
         boton.innerText = '¡Visitar!'
         boton.addEventListener('click', async function() {
             try {
@@ -60,29 +76,29 @@ function darBotones() {
                         'propiedad': inmueble['id']
                     })
                 })
-                const verdad = await respuesta.json()
+                console.log(respuesta);
+                const verdad = (await respuesta).json()
                 if (verdad['success']) {
                     modal(verdad['message'])
                     let nuevo = boton.cloneNode(true)
                     nuevo.innerText = '¡Comprar!'
                     boton.parentNode.replaceChild(nuevo, boton)
                     boton.addEventListener('click', async function() {
-                        await comprar()
+                        comprar()
                     })
                 } else {
                     modal('¡Oh no! Algo salió mal D:')
                 }
             } catch (error) {
-                
+                console.log(error);
             }
         })
     }
     console.log(inmueble);
 }
 
-async function comprar() {
+function comprar() {
     let boton = document.querySelector('main button')
-    
 }
 
 function calcular(fecha) {
@@ -134,3 +150,26 @@ function inicial() {
 }
 
 inicial()
+
+function modal(texto, pasar = undefined) {
+    let p = mensaje.querySelector('#modal p')
+    console.log(texto);
+    p.innerHTML = texto
+    mensaje.style.display = 'block'
+    if (pasar != undefined) {
+        console.log('pasar');
+        botonModal.addEventListener('click', () => {
+            mensaje.style.display = 'none'
+            location.href = pasar
+            let nuevo = botonModal.cloneNode(true)
+            botonModal.parentNode.replaceChild(nuevo, botonModal)
+        })
+    } else {
+        console.log('no pasar');
+        botonModal.addEventListener('click', () => {
+            mensaje.style.display = 'none'
+            let nuevo = botonModal.cloneNode(true)
+            botonModal.parentNode.replaceChild(nuevo, botonModal)
+        })
+    }
+}

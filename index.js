@@ -21,6 +21,18 @@ function prueba() {
     }
 }
 
+let mensaje = document.getElementById('modal')
+let boton = mensaje.querySelector('#modal button')
+boton.addEventListener('click', () => {
+    mensaje.style.display = 'none'
+})
+
+window.onclick = function(event) {
+    if (event.target == mensaje) {
+        mensaje.style.display = "none";
+    }
+}
+
 prueba()
 
 function texto(tipo) {
@@ -86,3 +98,27 @@ async function mostrar() {
 }
 
 mostrar()
+
+function modal(texto, pasar = undefined) {
+    let p = mensaje.querySelector('#modal p')
+    console.log(texto);
+    p.innerHTML = texto
+    mensaje.style.display = 'block'
+    let boton = mensaje.querySelector('#modal button')
+    if (pasar != undefined) {
+        console.log('pasar');
+        boton.addEventListener('click', () => {
+            mensaje.style.display = 'none'
+            location.href = pasar
+            let nuevo = boton.cloneNode(true)
+            boton.parentNode.replaceChild(nuevo, boton)
+        })
+    } else {
+        console.log('no pasar');
+        boton.addEventListener('click', () => {
+            mensaje.style.display = 'none'
+            let nuevo = boton.cloneNode(true)
+            boton.parentNode.replaceChild(nuevo, boton)
+        })
+    }
+}
