@@ -291,6 +291,19 @@ form > p {
     border-radius: 10px;
 }
 
+.carga {
+    display: none;
+    position: fixed;
+    margin: auto;
+    width: 300px;
+    background-color: whitesmoke;
+    height: min-content;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px grey;
+    transition: all 0.5s ease-in-out;
+    /* No al principio */
+}
+
 .desaparecer {
     display: none;
 }
