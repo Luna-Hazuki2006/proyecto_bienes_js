@@ -25,6 +25,7 @@ prueba()
 
 let mensaje = document.getElementById('modal')
 let botonModal = mensaje.querySelector('#modal button')
+let tramite = document.getElementById('tramite')
 botonModal.addEventListener('click', () => {
     mensaje.style.display = 'none'
 })
@@ -32,6 +33,7 @@ botonModal.addEventListener('click', () => {
 window.onclick = function(event) {
     if (event.target == mensaje) {
         mensaje.style.display = "none";
+        // tramite.style.display = 'none'
     }
 }
 
@@ -58,7 +60,7 @@ function mostrarImagenes(numero) {
 
 function darBotones() {
     let boton = document.querySelector('main button')
-    if (!sessionStorage.getItem('token')) {
+    if (!sessionStorage.getItem('token') || inmueble['estado'] == 3) {
         boton.classList.add('desaparecer')
         return
     }
@@ -66,16 +68,7 @@ function darBotones() {
         boton.innerText = '¡Visitar!'
         boton.addEventListener('click', async function() {
             try {
-                const usuario = await fetch('https://graco-api.onrender.com/perfil', {
-                    method: 'GET', 
-                    headers: {
-                        'Content-Type': 'application/json', 
-                        'Authorization': sessionStorage.getItem('token')
-                    }
-                })
-                const usuarioData = await usuario.json()
-                console.log(usuario['data']);
-                const respuesta = fetch('https://graco-api.onrender.com/visitar-propiedad', {
+                const respuesta = await fetch('https://graco-api.onrender.com/visitar-propiedad', {
                     method: 'POST', 
                     headers: {
                         'Content-Type': 'application/json',
@@ -85,31 +78,66 @@ function darBotones() {
                         'propiedad': inmueble['id']
                     })
                 })
+                const verdad = await respuesta.json()
+                console.log(verdad);
                 console.log(respuesta);
-                const verdad = (await respuesta).json
-                if (verdad['success']) {
-                    modal(verdad['message'])
-                    let nuevo = boton.cloneNode(true)
-                    nuevo.innerText = '¡Comprar!'
-                    boton.parentNode.replaceChild(nuevo, boton)
-                    boton.addEventListener('click', async function() {
-                        comprar()
-                    })
-                } else {
-                    modal('¡Oh no! Algo salió mal D:')
-                }
+                // let nuevo = boton.cloneNode(true)
+                boton.innerText = '¡Comprar!'
+                // boton.parentNode.replaceChild(nuevo, boton)
+                boton.addEventListener('click', async function() {
+                    comprar()
+                })
             } catch (error) {
                 console.log(error);
             }
         })
     } else if (inmueble['estado'] == 2) {
-        comprar()
+        // let nuevo = boton.cloneNode(true)
+        boton.innerText = '¡Comprar!'
+        // boton.parentNode.replaceChild(nuevo, boton)
+        boton.addEventListener('click', async function() {
+            comprar()
+        })
     }
     console.log(inmueble);
 }
 
 function comprar() {
-    let boton = document.querySelector('main button')
+    tramite.style.display = 'block'
+    let forma = tramite.querySelector('form')
+    let boton = forma.querySelector('form button')
+    boton.addEventListener('submit', async function(event) {
+        event.preventDefault()
+        let data = new FormData(forma)
+        let correo = data.get('correo')
+        let telefono = data.get('telefono')
+        let nombre = data.get('nombre')
+        try {
+            const respuesta = await fetch('https://graco-api.onrender.com/tramitar-propiedad', {
+                method: 'POST', 
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": sessionStorage.getItem('token')
+                }, 
+                body: JSON.stringify({
+                    "propiedad": inmueble['id'],
+                    "correo": correo,
+                    "nombre": nombre,
+                    "telefono": telefono,
+                    "transaccion": '1'
+                })
+            })
+            const verdad = await respuesta.json()
+            if (verdad['success']) {
+                modal('¡Felicidades! Trámite pagado con éxito', '../')
+            } else {
+                modal('¡Oh no! No se pudo tramitar la compra D:')
+            }
+        } catch (error) {
+            console.log(error);
+            modal('¡Oh no! Un error grave ha sucedido')
+        }
+    })
 }
 
 function calcular(fecha) {

@@ -295,6 +295,16 @@ form > p {
     display: none;
 }
 
+#tramite input, #tramite label {
+    width: 90%;
+    margin-left: 10px;
+}
+
+#tramite button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 @keyframes animartop {
     from {
         top:-300px; 
